@@ -1,0 +1,45 @@
+{
+  "name": "Delivery",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "orderId": {
+      "type": "number",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "receiverName": {
+      "type": "string"
+    },
+    "receiverCPF": {
+      "type": "string"
+    },
+    "receiverIsOwner": {
+      "type": "boolean"
+    },
+    "deliveryDate": {
+      "type": "date",
+      "required": true
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "latitude": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
