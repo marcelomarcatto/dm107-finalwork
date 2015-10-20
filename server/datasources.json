@@ -1,3 +1,4 @@
+// sudo service mongod start
 {
   "db": {
     "name": "db",
