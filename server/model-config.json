@@ -35,5 +35,9 @@
   "Delivery": {
     "dataSource": "deliveries",
     "public": true
+  },
+  "user": {
+    "dataSource": "db",
+    "public": true
   }
 }
