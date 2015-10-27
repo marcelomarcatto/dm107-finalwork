@@ -38,7 +38,10 @@
     "public": true
   },
   "user": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "deliveries",
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
   }
 }
