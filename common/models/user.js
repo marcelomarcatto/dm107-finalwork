@@ -1,4 +1,6 @@
 module.exports = function(user) {
+  // Disables auto defined ChangeStreans methods.
+  user.disableRemoteMethod('createChangeStream', true);
   //send verification email after registration
   // user.afterRemote('create', function(context, user) {
   //   console.log('> user.afterRemote triggered');

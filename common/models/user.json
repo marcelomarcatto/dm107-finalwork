@@ -3,7 +3,7 @@
   "base": "User",
   "idInjection": true,
   "options": {
-    "validateUpsert": false
+    "validateUpsert": true
   },
   "properties": {},
   "validations": [],
