@@ -17,7 +17,10 @@ module.exports = function(Delivery) {
             // finalDate.setSeconds(59);
             filters.push({deliveryDate: {lte: finalDate}});
         }
-        console.log(filters);
+
+        if (!filters) {
+            return;
+        }
 
         Delivery.find({where: {and: filters}}, function(error, results) {
 
@@ -40,6 +43,7 @@ module.exports = function(Delivery) {
                             callback(null, response);
                         } else {
                             console.log(error);
+                            return error;
                         }
         });
     }
