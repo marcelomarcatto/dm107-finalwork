@@ -5,46 +5,50 @@ module.exports = function(Delivery) {
     // GET listDeliveriesByDate
     Delivery.listDeliveriesByDate = function(initialDate, finalDate, callback) {
         var filters = [];
+
         if (initialDate) {
             initialDate.setDate(initialDate.getDate() + 1);
-            // initialDate.setHours(0);
             filters.push({deliveryDate: {gte: initialDate}});
         }
         if (finalDate) {
             finalDate.setDate(finalDate.getDate() + 1);
-            // finalDate.setHours(0);
-            // finalDate.setMinutes(59);
-            // finalDate.setSeconds(59);
+            if (initialDate && initialDate > finalDate) {
+                var error = new Error('Final date ' + finalDate
+                    + ' must be greater than initial date ' + initialDate);
+                error.statusCode = 401;
+                callback(error, null);
+            }
             filters.push({deliveryDate: {lte: finalDate}});
         }
 
-        if (!filters) {
-            return;
+        if (!filters.length) {
+            var error = new Error('At least one input parameter must be set.');
+            error.statusCode = 401;
+            callback(error, null);
         }
 
         Delivery.find({where: {and: filters}}, function(error, results) {
+            var response = {};
 
-                        var response = {};
-                        if (!error) {
-                            results.forEach(function(delivery){
+            if (error) {
+                callback(error, response);
+            }
 
-                                var date = delivery.deliveryDate;
-                                if (!response[date]){
-                                    response[date] = {
-                                        'deliveriesCount': 0,
-                                        'isOwnerCount': 0
-                                    };
-                                }
-                                response[date].deliveriesCount = response[date].deliveriesCount + 1;
-                                if (delivery.receiverIsOwner) {
-                                    response[date].isOwnerCount = response[date].isOwnerCount + 1;
-                                }
-                            });
-                            callback(null, response);
-                        } else {
-                            console.log(error);
-                            return error;
-                        }
+            results.forEach(function(delivery){
+
+                var date = delivery.deliveryDate;
+                if (!response[date]){
+                    response[date] = {
+                        'deliveriesCount': 0,
+                        'isOwnerCount': 0
+                    };
+                }
+                response[date].deliveriesCount = response[date].deliveriesCount + 1;
+                if (delivery.receiverIsOwner) {
+                    response[date].isOwnerCount = response[date].isOwnerCount + 1;
+                }
+            });
+            callback(null, response);
         });
     }
 
