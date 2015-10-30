@@ -40,13 +40,7 @@
   },
   "validations": [],
   "relations": {},
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
-    },
+  "acls": [    
     {
       "accessType": "*",
       "principalType": "ROLE",
@@ -54,7 +48,7 @@
       "permission": "DENY"
     },
     {
-      "accessType": "READ",
+      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW"
