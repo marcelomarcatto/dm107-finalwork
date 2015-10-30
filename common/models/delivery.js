@@ -12,10 +12,11 @@ module.exports = function(Delivery) {
         }
         if (finalDate) {
             finalDate.setDate(finalDate.getDate() + 1);
+            // Validate final greater than initial date
             if (initialDate && initialDate > finalDate) {
                 var error = new Error('Final date ' + finalDate
                     + ' must be greater than initial date ' + initialDate);
-                error.statusCode = 401;
+                error.statusCode = 400;
                 callback(error, null);
             }
             filters.push({deliveryDate: {lte: finalDate}});
@@ -23,7 +24,7 @@ module.exports = function(Delivery) {
 
         if (!filters.length) {
             var error = new Error('At least one input parameter must be set.');
-            error.statusCode = 401;
+            error.statusCode = 400;
             callback(error, null);
         }
 
