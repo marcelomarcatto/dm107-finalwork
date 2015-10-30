@@ -7,11 +7,11 @@ module.exports = function(Delivery) {
         var filters = [];
 
         if (initialDate) {
-            initialDate.setDate(initialDate.getDate() + 1);
+            // initialDate.setDate(initialDate.getDate() + 1);
             filters.push({deliveryDate: {gte: initialDate}});
         }
         if (finalDate) {
-            finalDate.setDate(finalDate.getDate() + 1);
+            // finalDate.setDate(finalDate.getDate() + 1);
             // Validate final greater than initial date
             if (initialDate && initialDate > finalDate) {
                 var error = new Error('Final date ' + finalDate
