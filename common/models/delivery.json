@@ -1,5 +1,5 @@
 {
-  "name": "Delivery",
+  "name": "delivery",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -40,7 +40,7 @@
   },
   "validations": [],
   "relations": {},
-  "acls": [    
+  "acls": [
     {
       "accessType": "*",
       "principalType": "ROLE",

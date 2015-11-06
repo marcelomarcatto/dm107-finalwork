@@ -1,15 +1,15 @@
-module.exports = function(Delivery) {
+module.exports = function(delivery) {
     // Disables auto defined ChangeStreans methods.
-    Delivery.disableRemoteMethod('createChangeStream', true);
+    delivery.disableRemoteMethod('createChangeStream', true);
 
     // GET listDeliveriesByDate
-    Delivery.listDeliveriesByDate = function(initialDate, finalDate, callback) {
+    delivery.listDeliveriesByDate = function(initialDate, finalDate, callback) {
         var filters = [];
 
         if (initialDate) {
             filters.push({deliveryDate: {gte: initialDate}});
         }
-        if (finalDate) {            
+        if (finalDate) {
             // Validate final greater than initial date
             if (initialDate && initialDate > finalDate) {
                 var error = new Error('Final date ' + finalDate
@@ -26,7 +26,7 @@ module.exports = function(Delivery) {
             callback(error, null);
         }
 
-        Delivery.find({where: {and: filters}}, function(error, results) {
+        delivery.find({where: {and: filters}}, function(error, results) {
             var response = {};
 
             if (error) {
@@ -51,7 +51,7 @@ module.exports = function(Delivery) {
         });
     }
 
-    Delivery.remoteMethod('listDeliveriesByDate', {
+    delivery.remoteMethod('listDeliveriesByDate', {
         description: "Returns a deliveries report during a period between at least one of two dates.",
         accepts: [
             {arg: 'initialDate', type: 'date', description: "Initial date for the report (yyyy-mm-dd)."},

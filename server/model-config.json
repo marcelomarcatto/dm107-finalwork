@@ -33,7 +33,7 @@
     "dataSource": "db",
     "public": false
   },
-  "Delivery": {
+  "delivery": {
     "dataSource": "deliveries",
     "public": true
   },
